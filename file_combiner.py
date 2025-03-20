@@ -4,9 +4,9 @@ from tkinter import messagebox
 import os
 import json
 from typing import List
+#pip install tkinterdnd2
 from tkinterdnd2 import DND_FILES, TkinterDnD
 from tkinter import filedialog
-
 
 class FileCombinerApp:
     def __init__(self, root):
@@ -210,9 +210,12 @@ class FileCombinerApp:
 
     def _process_file(self, file_path: str, outfile):
         try:
+            # Normalize path separators
+            normalized_path = os.path.normpath(file_path)
+            
             with open(file_path, "r", encoding="utf-8") as infile:
                 outfile.write(f"\n{'='*50}\n")
-                outfile.write(f"Content from: {file_path}\n")
+                outfile.write(f"Content from: {normalized_path}\n")
                 outfile.write(f"{'='*50}\n\n")
                 outfile.write(infile.read())
                 outfile.write("\n")
